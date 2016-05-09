@@ -60,7 +60,18 @@ exports.signin = function(req, res) {
     });
 };
 // Create a new controller method for signing out
-exports.signout = function(req, res) {};
+exports.signout = function(req, res) {
+    req.session.user = undefined;
+    if (req.session.user == undefined) {
+        return res.status(200).send({
+            message: 'user out success'
+        });
+    } else {
+        return res.status(401).send({
+            message: 'logout failed'
+        });
+    }
+};
 // Create a new controller middleware that is used to authorize authenticated operations 
 exports.checkAuthenticated = function(req, res, next) {
     // If a user is not authenticated send the appropriate error message

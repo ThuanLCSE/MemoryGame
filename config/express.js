@@ -41,7 +41,6 @@ module.exports = function(db) {
 	// Load the routing files
 	require('../appServer/routes/index.server.routes.js')(app);
 	require('../appServer/routes/users.server.routes.js')(app);
-	require('../appServer/routes/articles.server.routes.js')(app);
 	require('../appServer/routes/picture.server.routes.js')(app);
 
 	// Configure static file serving

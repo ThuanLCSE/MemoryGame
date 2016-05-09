@@ -12,7 +12,7 @@
         </a>
     </div>
     <!-- data-ng-show="authentication.user"-->
-    <div id="main-screen">
+    <div id="main-screen"  ng-controller="UsersController">
         <label>
             Player : {{ user.fullName }}
         </label>
@@ -31,7 +31,7 @@
         <button type="button" ng-click="pauseGame()">
             Pause
         </button>
-        <button type="button" ng-click="finishGame()">
+        <button type="button" ng-click="finishGame(); saveNewResult()">
             Finish
         </button>
         <button type="button" ng-click="loadTutorial()">
@@ -43,16 +43,11 @@
         </label>
         <img ng-src="http://localhost:3000/img/{{ currentPicture.url }}" alt="image" height="70" width="70"/>
         <table id="board">
-            <tr ng-repeat="numRow in [0,1,2,3,4,5,7,8,9]">
-                <td ng-repeat="numCol in [0,1,2,3,4,5,7,8,9]">
-                    <label  ng-click="numberSelect($event)">
-                        <div class="num-icon" name="{{ $parent.$index*10 + $index }}">
-                            {{ $parent.$index*10 + $index }}
-                        </div>
-                    </label>
-                </td>
-            </tr>
+          
         </table>
+        <button type="button" ng-click="resetBoard()">
+            reset board
+        </button>
     </div>
     <div id="game-result" height="400px">
         Result table ID
@@ -71,6 +66,9 @@
         </button>
         <button type="button" ng-click="getPlayingHistory()">
             Get history
+        </button>
+         <button type="button" ng-click="signout()">
+            sign out
         </button>
         Fullname: {{ user.fullName }}
         <div>

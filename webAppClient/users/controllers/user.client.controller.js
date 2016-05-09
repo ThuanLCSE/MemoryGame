@@ -22,6 +22,15 @@ angular.module('users').controller('UsersController', ['$scope', '$routeParams',
                 $scope.error = errorResponse;
             });
         };
+          $scope.signout = function() {
+            UsersService.signout({
+                action: 'signout'
+            },null, function(response) {
+                $location.path('/signin');
+            }, function(errorResponse) {
+               console.log(errorResponse);
+            });
+        };
         $scope.signup = function() {
             // Use the form fields to create a new article $resource object
             var newUser = {

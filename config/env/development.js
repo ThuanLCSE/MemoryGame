@@ -3,7 +3,7 @@
 
 // Set the 'development' environment configuration object
 module.exports = {
-	db: 'mongodb://127.0.0.1/mean-development',
+	db: 'mongodb://localhost/mean-development',
 	sessionSecret: 'this is my secret',
 	facebook: {
 		clientID: 'Facebook Application ID',

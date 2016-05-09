@@ -1,8 +1,9 @@
 // Invoke 'strict' JavaScript mode
 'use strict';
 // Create the 'example' controller
-angular.module('gameBoard').controller('GameBoardController', ['$scope', '$interval', '$location', 'GameBoardService', 'UsersService',
-    function($scope, $interval, $location, GameBoardService, UsersService) {
+angular.module('gameBoard').controller('GameBoardController', ['$scope', 
+    '$interval', '$location','$compile', 'GameBoardService', 'UsersService',
+    function($scope, $interval, $location,$compile, GameBoardService, UsersService) {
         // Expose the authentication service
         $scope.checkAuth = function() {
             $scope.authentication = {};
@@ -19,6 +20,42 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$inter
         }
         var gotoAnchor = function(tagId) {
             document.getElementById(tagId).scrollIntoView();
+        }
+        $scope.arrayNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $scope.initNumber = function(ids) {
+            return function(item) {
+                var number = $scope.arrayNumber;
+                return number.indexOf(item.id) !== -1;
+            }
+        }
+        var initBoard = function(board) {
+            for (var i = 0; i < 10; i++) {
+                var tr = document.createElement('tr');
+                for (var j = 0; j < 10; j++) {
+                    var td = document.createElement('td');
+                    var label = document.createElement('label');
+                    label.setAttribute("ng-click","numberSelect($event)");
+                    var divNumb = document.createElement("div");
+                    divNumb.setAttribute("name", i * 10 + j);
+                    divNumb.setAttribute("class", "num-icon");
+                    divNumb.appendChild(document.createTextNode(i * 10 + j));
+                    label.appendChild(divNumb);
+                    var bindLabel = $compile(label)($scope);
+                    angular.element(td).append(bindLabel);
+                    tr.appendChild(td);
+                }
+                board.appendChild(tr);
+            }
+        }
+        var deleteBoard = function(board) {
+            while (board.hasChildNodes()) {
+                board.removeChild(board.lastChild);
+            }
+        }
+        $scope.resetBoard = function() {
+            var board = document.getElementById('board');
+            deleteBoard(board);
+            initBoard(board);
         }
         $scope.currentPicture = {};
         var indexPicture = [];
@@ -41,6 +78,7 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$inter
             $scope.triedTime = 0;
             $scope.score = 0;
             $scope.seconds = 0;
+            $scope.resetBoard();
             startCount();
             gotoAnchor('main-screen');
         }
@@ -58,8 +96,7 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$inter
             stopCount();
             gotoAnchor('game-result');
         }
-        $scope.loadTutorial = function(){
-
+        $scope.loadTutorial = function() {
             gotoAnchor('tutorial');
         }
 
@@ -136,15 +173,15 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$inter
                 finishGame();
             }
         }
-        $scope.numberSelect = function($event) {
-            var number = $event.currentTarget.children[0].getAttribute('name');
+        $scope.numberSelect = function(obj) {
+            var number = obj.currentTarget.children[0].getAttribute('name');
             if (number == indexPicture[currentIndex]) {
                 var imageChanging = document.createElement("img");
                 imageChanging.setAttribute("src", "http://localhost:3000/img/" + $scope.currentPicture.url);
                 imageChanging.height = 42;
                 imageChanging.width = 42;
-                $event.currentTarget.children[0].style.display = 'none';
-                $event.currentTarget.appendChild(imageChanging);
+                obj.currentTarget.removeChild(obj.currentTarget.children[0]);
+                obj.currentTarget.appendChild(imageChanging);
                 addScore();
                 loadNextPicture();
             } else {
@@ -153,6 +190,9 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$inter
                     loadNextPicture();
                 }
             }
+        }
+        $scope.testFunc = function() {
+            console.log('test ok');
         }
     }
 ]);

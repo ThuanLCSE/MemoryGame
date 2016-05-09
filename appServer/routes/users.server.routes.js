@@ -21,5 +21,5 @@ module.exports = function(app) {
 	app.route('/api/users/getPlayingHistory')
 	.get(users.getPlayingHistory);
 	// Set up the 'signout' route
-	app.get('/signout', users.signout);
+	app.get('/api/users/signout', users.signout);
 };

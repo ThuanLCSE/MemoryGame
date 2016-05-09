@@ -13,6 +13,9 @@ angular.module('users').factory('UsersService',
         signup: {
             method: 'POST'
         },
+        signout : {
+            method : 'GET'
+        },
         checkAuthenticated: {
             method: 'GET'
         },
