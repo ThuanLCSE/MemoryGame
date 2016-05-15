@@ -20,8 +20,11 @@ module.exports = function(app) {
 	.post(users.updateResult);
 	app.route('/api/users/getPlayingHistory')
 	.get(users.getPlayingHistory);
+<<<<<<< HEAD
 	app.route('/api/users/getNumberPlayer')
 	.get(users.getNumberPlayer);
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 	// Set up the 'signout' route
 	app.get('/api/users/signout', users.signout);
 };

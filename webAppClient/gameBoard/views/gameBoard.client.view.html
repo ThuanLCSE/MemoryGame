@@ -1,6 +1,7 @@
 <!--
     The example view
 -->
+<<<<<<< HEAD
 <section ng-controller="GameBoardController"  ng-init="checkSession()" class="wrapper">
     <div ng-show="globalData.userFullName" ng-controller="UsersController" ng-init="resetBoard()">
         <div class="col-xs-3 col-md-3 navigator-left navbar">
@@ -220,4 +221,105 @@
         100 code
     </div>
 </div>
+=======
+<section ng-controller="GameBoardController"  ng-init="checkAuth()">
+    <!-- If the user is not authenticated show the authentication link -->
+    <div data-ng-show="!authentication.user">
+        <a href="/#!/signup">
+            Signup
+        </a>
+        <a href="/#!/signin">
+            Signin
+        </a>
+    </div>
+    <!-- data-ng-show="authentication.user"-->
+    <div id="main-screen"  ng-controller="UsersController">
+        <label>
+            Player : {{ user.fullName }}
+        </label>
+        <label>
+            Time :
+            <timer autostart="false" interval="1000">
+                {{ seconds | secondsToDateTime | date:'mm:ss' }}
+            </timer>
+        </label>
+        <label>
+            Score : {{ score }}
+        </label>
+        <button type="button" ng-click="startGame()">
+            Start
+        </button>
+        <button type="button" ng-click="pauseGame()">
+            Pause
+        </button>
+        <button type="button" ng-click="finishGame(); saveNewResult()">
+            Finish
+        </button>
+        <button type="button" ng-click="loadTutorial()">
+            How to play
+        </button>
+        tried time: {{ triedTime }}
+        <label>
+            {{ currentPicture.label }}
+        </label>
+        <img ng-src="http://localhost:3000/img/{{ currentPicture.url }}" alt="image" height="70" width="70"/>
+        <table id="board">
+          
+        </table>
+        <button type="button" ng-click="resetBoard()">
+            reset board
+        </button>
+    </div>
+    <div id="game-result" height="400px">
+        Result table ID
+        <br/>
+        <button ng-show="pausing" type="button" ng-click="resumeGame()">
+            Resume
+        </button>
+        <button type="button" ng-click="startGame()">
+            Play again
+        </button>
+        <img src="http://localhost:3000/img/a" alt="blank" height="500"/>
+    </div>
+    <div id="user-profile" ng-controller="UsersController">
+        <button type="button" ng-click="saveNewResult()">
+            Save history
+        </button>
+        <button type="button" ng-click="getPlayingHistory()">
+            Get history
+        </button>
+         <button type="button" ng-click="signout()">
+            sign out
+        </button>
+        Fullname: {{ user.fullName }}
+        <div>
+        </div>
+        Score history:
+        <table>
+            <th>
+                Date
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Score
+            </th>
+            <tr ng-repeat="playingData in userHistory">
+                <td>
+                    {{ playingData.day.toLocaleString() }}   :
+                </td>
+                <td>
+                    {{ playingData.time | secondsToDateTime | date:'mm:ss' }}
+                </td>
+                <td>
+                    {{ playingData.score }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tutorial">
+         <img ng-src="http://localhost:3000/img/100code.png" alt="image" height="100%" width="100%"/>
+    </div
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 </section>

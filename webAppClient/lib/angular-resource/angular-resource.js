@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * @license AngularJS v1.4.10
  * (c) 2010-2015 Google, Inc. http://angularjs.org
+=======
+ * @license AngularJS v1.3.20
+ * (c) 2010-2014 Google, Inc. http://angularjs.org
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  * License: MIT
  */
 (function(window, angular, undefined) {'use strict';
@@ -10,7 +15,11 @@ var $resourceMinErr = angular.$$minErr('$resource');
 // Helper functions and regex to lookup a dotted path on an object
 // stopping at undefined/null.  The path must be composed of ASCII
 // identifiers (just like $parse)
+<<<<<<< HEAD
 var MEMBER_NAME_REGEX = /^(\.[a-zA-Z_$@][0-9a-zA-Z_$@]*)+$/;
+=======
+var MEMBER_NAME_REGEX = /^(\.[a-zA-Z_$][0-9a-zA-Z_$]*)+$/;
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 
 function isValidDottedPath(path) {
   return (path != null && path !== '' && path !== 'hasOwnProperty' &&
@@ -22,7 +31,11 @@ function lookupDottedPath(obj, path) {
     throw $resourceMinErr('badmember', 'Dotted member path "@{0}" is invalid.', path);
   }
   var keys = path.split('.');
+<<<<<<< HEAD
   for (var i = 0, ii = keys.length; i < ii && angular.isDefined(obj); i++) {
+=======
+  for (var i = 0, ii = keys.length; i < ii && obj !== undefined; i++) {
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     var key = keys[i];
     obj = (obj !== null) ? obj[key] : undefined;
   }
@@ -90,7 +103,11 @@ function shallowClearAndCopy(src, dst) {
      }]);
  * ```
  *
+<<<<<<< HEAD
  * @param {string} url A parameterized URL template with parameters prefixed by `:` as in
+=======
+ * @param {string} url A parametrized URL template with parameters prefixed by `:` as in
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  *   `/user/:username`. If you are using a URL with a port number (e.g.
  *   `http://example.com:8080/api`), it will be respected.
  *
@@ -102,7 +119,11 @@ function shallowClearAndCopy(src, dst) {
  *   can escape it with `/\.`.
  *
  * @param {Object=} paramDefaults Default values for `url` parameters. These can be overridden in
+<<<<<<< HEAD
  *   `actions` methods. If a parameter value is a function, it will be executed every time
+=======
+ *   `actions` methods. If any of the parameter value is a function, it will be executed every time
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  *   when a param value needs to be obtained for a request (unless the param was overridden).
  *
  *   Each key value in the parameter object is first bound to url template if present and then any
@@ -155,11 +176,16 @@ function shallowClearAndCopy(src, dst) {
  *     GET request, otherwise if a cache instance built with
  *     {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
  *     caching.
+<<<<<<< HEAD
  *   - **`timeout`** – `{number}` – timeout in milliseconds.<br />
  *     **Note:** In contrast to {@link ng.$http#usage $http.config}, {@link ng.$q promises} are
  *     **not** supported in $resource, because the same value would be used for multiple requests.
  *     If you need support for cancellable $resource actions, you should upgrade to version 1.5 or
  *     higher.
+=======
+ *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link ng.$q promise} that
+ *     should abort the request when resolved.
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
  *     XHR object. See
  *     [requests with credentials](https://developer.mozilla.org/en/http_access_control#section_5)
@@ -217,8 +243,12 @@ function shallowClearAndCopy(src, dst) {
  *   - non-GET instance actions:  `instance.$action([parameters], [success], [error])`
  *
  *
+<<<<<<< HEAD
  *   Success callback is called with (value, responseHeaders) arguments, where the value is
  *   the populated resource instance or collection object. The error callback is called
+=======
+ *   Success callback is called with (value, responseHeaders) arguments. Error callback is called
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  *   with (httpResponse) argument.
  *
  *   Class actions return empty instance (with additional properties below).
@@ -234,7 +264,11 @@ function shallowClearAndCopy(src, dst) {
  *     {@link ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
  *     rendering until the resource(s) are loaded.
  *
+<<<<<<< HEAD
  *     On failure, the promise is rejected with the {@link ng.$http http response} object, without
+=======
+ *     On failure, the promise is resolved with the {@link ng.$http http response} object, without
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  *     the `resource` property.
  *
  *     If an interceptor object was provided, the promise will instead be resolved with the value
@@ -356,7 +390,10 @@ function shallowClearAndCopy(src, dst) {
  */
 angular.module('ngResource', ['ng']).
   provider('$resource', function() {
+<<<<<<< HEAD
     var PROTOCOL_AND_DOMAIN_REGEX = /^https?:\/\/[^\/]*/;
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     var provider = this;
 
     this.defaults = {
@@ -373,7 +410,11 @@ angular.module('ngResource', ['ng']).
       }
     };
 
+<<<<<<< HEAD
     this.$get = ['$http', '$log', '$q', function($http, $log, $q) {
+=======
+    this.$get = ['$http', '$q', function($http, $q) {
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 
       var noop = angular.noop,
         forEach = angular.forEach,
@@ -431,8 +472,12 @@ angular.module('ngResource', ['ng']).
           var self = this,
             url = actionUrl || self.template,
             val,
+<<<<<<< HEAD
             encodedVal,
             protocolAndDomain = '';
+=======
+            encodedVal;
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 
           var urlParams = self.urlParams = {};
           forEach(url.split(/\W/), function(param) {
@@ -445,10 +490,13 @@ angular.module('ngResource', ['ng']).
             }
           });
           url = url.replace(/\\:/g, ':');
+<<<<<<< HEAD
           url = url.replace(PROTOCOL_AND_DOMAIN_REGEX, function(match) {
             protocolAndDomain = match;
             return '';
           });
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 
           params = params || {};
           forEach(self.urlParams, function(_, urlParam) {
@@ -479,7 +527,11 @@ angular.module('ngResource', ['ng']).
           // E.g. `http://url.com/id./format?q=x` becomes `http://url.com/id.format?q=x`
           url = url.replace(/\/\.(?=\w+($|\?))/, '.');
           // replace escaped `/\.` with `/.`
+<<<<<<< HEAD
           config.url = protocolAndDomain + url.replace(/\/\\\./, '/.');
+=======
+          config.url = url.replace(/\/\\\./, '/.');
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 
 
           // set params - delegate param encoding to $http
@@ -576,6 +628,7 @@ angular.module('ngResource', ['ng']).
               undefined;
 
             forEach(action, function(value, key) {
+<<<<<<< HEAD
               switch (key) {
                 default:
                   httpConfig[key] = copy(value);
@@ -594,6 +647,10 @@ angular.module('ngResource', ['ng']).
                         'upgrade to version 1.5 or higher.');
                   }
                   break;
+=======
+              if (key != 'params' && key != 'isArray' && key != 'interceptor') {
+                httpConfig[key] = copy(value);
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
               }
             });
 
@@ -612,8 +669,13 @@ angular.module('ngResource', ['ng']).
                 if (angular.isArray(data) !== (!!action.isArray)) {
                   throw $resourceMinErr('badcfg',
                       'Error in resource configuration for action `{0}`. Expected response to ' +
+<<<<<<< HEAD
                       'contain an {1} but got an {2} (Request: {3} {4})', name, action.isArray ? 'array' : 'object',
                     angular.isArray(data) ? 'array' : 'object', httpConfig.method, httpConfig.url);
+=======
+                      'contain an {1} but got an {2}', name, action.isArray ? 'array' : 'object',
+                    angular.isArray(data) ? 'array' : 'object');
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
                 }
                 // jshint +W018
                 if (action.isArray) {

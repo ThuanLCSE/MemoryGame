@@ -32,7 +32,10 @@ exports.authenBySession = function(req, res) {
         response = {
             message: 'User not in sess'
         };
+<<<<<<< HEAD
         return res.status(403).send();
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     } else {
         response = userInSession;
     }
@@ -96,6 +99,10 @@ exports.updateResult = function(req, res) {
                 message: 'Cannot find user'
             });
         } else {
+<<<<<<< HEAD
+=======
+            console.log(user.playingTime);
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             user.playingTime.push(newResult);
             user.save(function(err, user) {
                 if (err) {
@@ -118,7 +125,11 @@ exports.getPlayingHistory = function(req, res) {
     User.findOne({
         username: userInSession.username
     }, function(err, user) {
+<<<<<<< HEAD
         if (err) {
+=======
+        if (!user) {
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             return res.status(200).send({
                 message: 'Cannot find user'
             });
@@ -128,6 +139,7 @@ exports.getPlayingHistory = function(req, res) {
             });
         }
     });
+<<<<<<< HEAD
 };
 exports.getBestScore = function(req, res) {
     var loadedPosition = req.body.position;
@@ -146,4 +158,6 @@ exports.getNumberPlayer = function(req, res) {
             });
         }
     });
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 };

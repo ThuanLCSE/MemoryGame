@@ -6,6 +6,10 @@ var config = require('./config'),
 	http = require('http'),
 	express = require('express'),
 	morgan = require('morgan'),
+<<<<<<< HEAD
+=======
+	compress = require('compression'),
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	session = require('express-session');
@@ -41,7 +45,11 @@ module.exports = function(db) {
 	require('../appServer/routes/index.server.routes.js')(app);
 	require('../appServer/routes/users.server.routes.js')(app);
 	require('../appServer/routes/picture.server.routes.js')(app);
+<<<<<<< HEAD
 require('../appServer/routes/rank.server.routes.js')(app);
+=======
+
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 	// Configure static file serving
 	app.use(express.static('./webAppClient'));
 

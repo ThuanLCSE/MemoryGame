@@ -1,11 +1,19 @@
 {
+<<<<<<< HEAD
 	"name": "memmorygame",
+=======
+	"name": "MEAN",
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 	"version": "0.0.11",
 	"dependencies": {
 		"angular": "~1.4",
 		"angular-route": "~1.4",	
 		"angular-resource": "~1.4",	
+<<<<<<< HEAD
 		"angular-mocks": "~1.4",
 		 "jquery": "1.9.1 - 2"
+=======
+		"angular-mocks": "~1.4"
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 	}
 }

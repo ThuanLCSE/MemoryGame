@@ -1,6 +1,7 @@
 <!--
     The create article view
 -->
+<<<<<<< HEAD
 <section class=" form-center background" data-ng-controller="UsersController">
     <h1>
         Sign up for new user
@@ -53,4 +54,33 @@
     <a href="/#!/signin">
         I am already a member
     </a>
+=======
+<section data-ng-controller="UsersController">
+    <h1>
+        New User
+    </h1>
+    <!-- The new article form -->
+    <form data-ng-submit="signup()" method="post">
+        <label for="fullName">
+            Full name
+        </label>
+        <input type="text" data-ng-model="fullName" id="fullName" required/>
+        <label for="username">
+            username
+        </label>
+        <input type="text" data-ng-model="username" id="username" required/>
+        <label for="content">
+            password
+        </label>
+        <input type="password" data-ng-model="password" id="password" required/>
+        <label for="email">
+            Email
+        </label>
+        <input type="text" data-ng-model="email" id="email" />
+        <input type="submit" value="Sign up"/>
+        <!-- The error message element -->
+        <strong data-ng-bind="error">
+        </strong>
+    </form>
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 </section>

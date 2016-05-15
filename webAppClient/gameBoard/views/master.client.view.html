@@ -2,7 +2,10 @@
     The example view
 -->
 <section ng-controller="GameBoardController"  ng-init="checkAuth()">
+<<<<<<< HEAD
    
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     <!-- If the user is not authenticated show the authentication link -->
     <div data-ng-show="!authentication.user">
         <a href="/#!/signup">
@@ -12,7 +15,10 @@
             Signin
         </a>
     </div>
+<<<<<<< HEAD
       
+=======
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     <!-- Otherwise, show the user details and application links -->
     <div data-ng-show="!authentication.user">
         <form data-ng-submit="saveNewPicture()" method="post">
@@ -41,11 +47,20 @@
         </form>
     </div>
     <div ng-init="listAllPicture()">
+<<<<<<< HEAD
         {{ listPicture.length }}
         <table>
             <tr ng-repeat="picture in listPicture | orderBy:'index'">
                 <td>
                     {{ picture.label }};{{ picture.index }};{{ picture.url }}
+=======
+        {{listPicture.length}}
+        <table>
+            
+            <tr ng-repeat="picture in listPicture | orderBy:'index'">
+                <td>
+                    {{picture.label}};{{picture.index}};{{picture.url}}
+>>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
                 </td>
             </tr>
         </table>
