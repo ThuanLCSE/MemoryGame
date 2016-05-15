@@ -1,0 +1,223 @@
+<!--
+    The example view
+-->
+<section ng-controller="GameBoardController"  ng-init="checkSession()" class="wrapper">
+    <div ng-show="globalData.userFullName" ng-controller="UsersController" ng-init="resetBoard()">
+        <div class="col-xs-3 col-md-3 navigator-left navbar">
+            <div class="label-fixed">
+                <h3>
+                    Player : {{ globalData.userFullName }}
+                </h3>
+                <line>
+                </line>
+                <label>
+                    Number of participants: {{ globalData.numberPlayer }}
+                </label>
+            </div>
+            <div class="nav-left-bot" ng-show="running">
+                <img class="quiz-picture list-vertical" ng-src="../img/{{ currentPicture.url }}"/>
+                <div class="picture-info">
+                    <label ng-show="showText" class="quiz-label list-vertical">
+                        {{ currentPicture.label }}
+                    </label>
+                    <div class="bottom-info">
+                        <line>
+                        </line>
+                        <label>
+                            Wrong {{ triedTime }} time
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5 col-md-7 content">
+            <div id="main-screen" class="jumping-sector" ng-controller="UsersController">
+                <table id="board">
+                </table>
+            </div>
+            <div id="game-result" class="jumping-sector" ng-controller="UsersController">
+                <img class="img-pausing" ng-src="../img/cover3.png"/>
+                <div>
+                </div>
+                <h3>
+                    <i class="fa fa-flag fa-fw" aria-hidden="true">
+                    </i>
+                    Playing history
+                </h3>
+                <table class="table table-responsive table-scrollable">
+                    <tr ng-repeat="playingData in globalData.userHistory | orderBy:globalData.critical:globalData.reverse">
+                        <td>
+                            {{ playingData.day |  date:"dd/MM/yy '-' hh:mm " }}
+                        </td>
+                        <td>
+                            {{ playingData.score }} point
+                        </td>
+                        <td>
+                            in {{ playingData.time | secondsToDateTime | date:'mm:ss' }}
+                        </td>
+                    </tr>
+                </table>
+                <div class="order-button">
+                    <label class="border-title">
+                        ORDER BY
+                    </label>
+                    <button  type="button" ng-click="order('day')">
+                        Day
+                    </button>
+                    <button  type="button" ng-click="order('score')">
+                        Score
+                    </button>
+                    <button  type="button" ng-click="order('time')">
+                        Time
+                    </button>
+                </div>
+                <button  type="button" ng-click="viewRank()">
+                    View ranking board
+                </button>
+            </div>
+            <div id="ranking" class="jumping-sector" ng-controller="RankingController" ng-init="showRankingBoard()">
+                 <img class="img-pausing" ng-src="../img/cover1.png"/>
+                
+                <h2>
+                    <i class="fa fa-empire fa-fw" aria-hidden="true">
+                    </i>
+                    Ranking board
+                </h2>
+                <table class="table table-responsive table-scrollable">
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                    <tr ng-repeat="data in globalData.rankingBoard | orderBy : 'time'">
+                        <td>
+                            {{ data.fullName }}
+                        </td>
+                        <td>
+                            {{ data.day | date:"dd/MM/yy '-' hh:mm' :'" }}
+                        </td>
+                        <td>
+                            {{ data.time | secondsToDateTime | date:'mm:ss' }}
+                        </td>
+                        <td>
+                            {{ data.score }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="tutorial"  class="jumping-sector">
+                <pre>
+                    You can choose mode Easy or Hard to play.
+                    Easy: Picture with text
+                    Hard: Only picture
+                    Click to the correct code number of the picture to get point.
+                    Below is 100 pictures for code number from 00 to 99
+                    (Click to see bigger picture)
+                </pre>
+                <!--ng-show="showingTut"-->
+                <img src="../img/100code.png" data-toggle="modal" data-target="#image-modal" alt="Click to see" class="image-tutorial"/>
+            </div>
+        </div>
+        <div class="col-xs-2 right">
+            <nav class="navigator-right navbar">
+                <button class="item-list-vertical" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-expanded="true" aria-controls="menuCollapse">
+                    <i class="fa fa-angle-double-down fa-fw" aria-hidden="true">
+                    </i>
+                    Menu
+                </button>
+                <div class="collapse in" id="menuCollapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <h3>
+                                Time :
+                                {{ seconds | secondsToDateTime | date:'mm:ss' }}
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                Score : {{ score }}
+                            </h3>
+                        </li>
+                        <li>
+                            <button type="button" class="item-list-vertical" data-toggle="modal" data-target="#start-modal">
+                                Start game
+                            </button>
+                        </li>
+                        <li ng-show="running">
+                            <button class="item-list-vertical" type="button" ng-click="pauseGame()">
+                                Pause
+                            </button>
+                        </li>
+                        <li>
+                            <button ng-show="pausing" type="button" ng-click="resumeGame()">
+                                Resume
+                            </button>
+                        </li>
+                        <li ng-show="running || pausing">
+                            <button class="item-list-vertical" type="button" ng-click="finishGame()">
+                                Finish
+                            </button>
+                        </li>
+                        <li>
+                            <button class="item-list-vertical" type="button" ng-click="finishGame();getPlayingHistory()">
+                                View scores
+                            </button>
+                        </li>
+                        <li>
+                            <button class="item-list-vertical" type="button" ng-click="loadTutorial()">
+                                How to play
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <button class="bottom-list" type="button" ng-click="signout()">
+                <i class="fa fa-sign-out fa-fw" aria-hidden="true">
+                </i>
+                Sign Out
+            </button>
+        </div>
+    </div>
+    <!--
+        /col-md-2 navigation
+    -->
+    <!-- /col-md-2 navigation -->
+</div>
+<!-- Modal -->
+<div class="modal fade center-modal" id="start-modal">
+    <div class="modal-title border-title">
+        GAME MODE
+    </div>
+    <div class="body-center">
+        <button type="button" title="Picture and label" data-dismiss="modal" ng-click="startGame('easy')">
+            Easy
+        </button>
+        <button type="button" title="Picture without label" data-dismiss="modal" ng-click="startGame('hard')">
+            Hard
+        </button>
+    </div>
+    <img ng-src="../img/cover2.png" class="img-start-mode"/>
+</div>
+<!--picture- modal-->
+<div id="image-modal"  class="modal">
+    <!-- The Close Button -->
+    <span class="modal-title"   data-dismiss="modal">
+        close &times;
+    </span>
+    <div class="limit-space">
+        <!-- Modal Content (The Image) -->
+        <img src="../img/100code-big.png" class="image-big"/>
+    </div>
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption">
+        100 code
+    </div>
+</div>
+</section>

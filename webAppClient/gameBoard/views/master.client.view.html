@@ -1,0 +1,53 @@
+<!--
+    The example view
+-->
+<section ng-controller="GameBoardController"  ng-init="checkAuth()">
+   
+    <!-- If the user is not authenticated show the authentication link -->
+    <div data-ng-show="!authentication.user">
+        <a href="/#!/signup">
+            Signup
+        </a>
+        <a href="/#!/signin">
+            Signin
+        </a>
+    </div>
+      
+    <!-- Otherwise, show the user details and application links -->
+    <div data-ng-show="!authentication.user">
+        <form data-ng-submit="saveNewPicture()" method="post">
+            <label for="label">
+                Label
+            </label>
+            <input type="text" name="label" ng-model="label" required/>
+            <div>
+            </div>
+            <label for="index">
+                index
+            </label>
+            <input type="text" name="index" ng-model="index" required/>
+            <div>
+            </div>
+            <label for="url">
+                url
+            </label>
+            <input type="text" name="url" ng-model="url" required/>
+            <div>
+            </div>
+            <input type="submit" value="Up"/>
+            <!-- The error message element -->
+            <strong data-ng-bind="error">
+            </strong>
+        </form>
+    </div>
+    <div ng-init="listAllPicture()">
+        {{ listPicture.length }}
+        <table>
+            <tr ng-repeat="picture in listPicture | orderBy:'index'">
+                <td>
+                    {{ picture.label }};{{ picture.index }};{{ picture.url }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
