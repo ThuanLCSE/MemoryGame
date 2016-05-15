@@ -1,11 +1,6 @@
 /**
-<<<<<<< HEAD
  * @license AngularJS v1.4.10
  * (c) 2010-2015 Google, Inc. http://angularjs.org
-=======
- * @license AngularJS v1.3.20
- * (c) 2010-2014 Google, Inc. http://angularjs.org
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
  * License: MIT
  */
 (function(window, angular, undefined) {'use strict';
@@ -83,13 +78,8 @@ function $RouteProvider() {
    *    - `controller` – `{(string|function()=}` – Controller fn that should be associated with
    *      newly created scope or the name of a {@link angular.Module#controller registered
    *      controller} if passed as a string.
-<<<<<<< HEAD
    *    - `controllerAs` – `{string=}` – An identifier name for a reference to the controller.
    *      If present, the controller will be published to scope under the `controllerAs` name.
-=======
-   *    - `controllerAs` – `{string=}` – A controller alias name. If present the controller will be
-   *      published to scope under the `controllerAs` name.
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
    *    - `template` – `{string=|function()=}` – html template as a string or a function that
    *      returns an html template as a string which should be used by {@link
    *      ngRoute.directive:ngView ngView} or {@link ng.directive:ngInclude ngInclude} directives.
@@ -216,15 +206,9 @@ function $RouteProvider() {
 
     path = path
       .replace(/([().])/g, '\\$1')
-<<<<<<< HEAD
       .replace(/(\/)?:(\w+)(\*\?|[\?\*])?/g, function(_, slash, key, option) {
         var optional = (option === '?' || option === '*?') ? '?' : null;
         var star = (option === '*' || option === '*?') ? '*' : null;
-=======
-      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option) {
-        var optional = option === '?' ? option : null;
-        var star = option === '*' ? option : null;
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
         keys.push({ name: key, optional: !!optional });
         slash = slash || '';
         return ''
@@ -484,7 +468,6 @@ function $RouteProvider() {
            */
           reload: function() {
             forceReload = true;
-<<<<<<< HEAD
 
             var fakeLocationEvent = {
               defaultPrevented: false,
@@ -497,12 +480,6 @@ function $RouteProvider() {
             $rootScope.$evalAsync(function() {
               prepareRoute(fakeLocationEvent);
               if (!fakeLocationEvent.defaultPrevented) commitRoute();
-=======
-            $rootScope.$evalAsync(function() {
-              // Don't support cancellation of a reload for now...
-              prepareRoute();
-              commitRoute();
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             });
           },
 
@@ -640,13 +617,8 @@ function $RouteProvider() {
               return $q.all(locals);
             }
           }).
-<<<<<<< HEAD
           then(function(locals) {
             // after route change
-=======
-          // after route change
-          then(function(locals) {
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
@@ -832,10 +804,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
         }
 
         .view-animate.ng-enter, .view-animate.ng-leave {
-<<<<<<< HEAD
-=======
-          -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
           transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 
           display:block;

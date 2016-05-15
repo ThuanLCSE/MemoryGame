@@ -24,12 +24,9 @@ angular.module('users').factory('UsersService',
         },
         getPlayingHistory: {
             method: 'GET'
-<<<<<<< HEAD
         },
         getNumberPlayer:{
             method:'GET'
-=======
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
         }
     });
 }]);

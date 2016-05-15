@@ -1,7 +1,6 @@
 // Invoke 'strict' JavaScript mode
 'use strict';
 // Create the 'example' controller
-<<<<<<< HEAD
 angular.module('gameBoard').controller('GameBoardController', ['$scope', '$rootScope', '$interval', '$location', '$compile', 'GameBoardService', 'UsersService', 'RankingService',
     function($scope, $rootScope, $interval, $location, $compile, GameBoardService, UsersService, RankingService) {
         // Expose the authentication service
@@ -33,24 +32,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope', '$rootS
                 }
                 $location.path('/signin');
             });
-=======
-angular.module('gameBoard').controller('GameBoardController', ['$scope', 
-    '$interval', '$location','$compile', 'GameBoardService', 'UsersService',
-    function($scope, $interval, $location,$compile, GameBoardService, UsersService) {
-        // Expose the authentication service
-        $scope.checkAuth = function() {
-            $scope.authentication = {};
-            UsersService.checkAuthenticated({
-                action: 'checkAuthenticated'
-            }, function(response) {
-                $scope.authentication.user = response.fullName;
-            }, function(errorResponse) {
-                if (authentication.user) {
-                    delete $scope.authentication.user;
-                }
-            });
-            gotoAnchor('main-screen');
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
         }
         var gotoAnchor = function(tagId) {
             document.getElementById(tagId).scrollIntoView();
@@ -67,7 +48,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
                 var tr = document.createElement('tr');
                 for (var j = 0; j < 10; j++) {
                     var td = document.createElement('td');
-<<<<<<< HEAD
                     td.setAttribute("class", "td-icon");
                     td.setAttribute("ng-click", "numberSelect($event)");
                     var divNumb = document.createElement("div");
@@ -78,18 +58,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
                     td.appendChild(divNumb);
                     var bindTd = $compile(td)($scope);
                     angular.element(tr).append(bindTd);
-=======
-                    var label = document.createElement('label');
-                    label.setAttribute("ng-click","numberSelect($event)");
-                    var divNumb = document.createElement("div");
-                    divNumb.setAttribute("name", i * 10 + j);
-                    divNumb.setAttribute("class", "num-icon");
-                    divNumb.appendChild(document.createTextNode(i * 10 + j));
-                    label.appendChild(divNumb);
-                    var bindLabel = $compile(label)($scope);
-                    angular.element(td).append(bindLabel);
-                    tr.appendChild(td);
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
                 }
                 board.appendChild(tr);
             }
@@ -99,30 +67,15 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
                 board.removeChild(board.lastChild);
             }
         }
-<<<<<<< HEAD
         $scope.viewRank = function() {
             gotoAnchor('ranking');
         }
-=======
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
         $scope.resetBoard = function() {
             var board = document.getElementById('board');
             deleteBoard(board);
             initBoard(board);
-<<<<<<< HEAD
             gotoAnchor('main-screen');
         }
-=======
-        }
-        $scope.currentPicture = {};
-        var indexPicture = [];
-        var currentIndex = 0;
-        $scope.pausing = false;
-        $scope.seconds = 0;
-        $scope.score = 0;
-        $scope.triedTime = 0;
-        var count = 0;
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
         var createIndexArray = function() {
             for (var i = 0; i <= 100; i++) {
                 indexPicture[i] = i;
@@ -130,7 +83,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             currentIndex = 0;
             shuffle(indexPicture);
         }
-<<<<<<< HEAD
         $scope.startGame = function(mode) {
             if (mode == 'hard') {
                 $scope.showText = false;
@@ -140,11 +92,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             loadPicture();
             createIndexArray();
             trueAll = true;
-=======
-        $scope.startGame = function() {
-            loadPicture();
-            createIndexArray();
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             $scope.triedTime = 0;
             $scope.score = 0;
             $scope.seconds = 0;
@@ -158,7 +105,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             gotoAnchor('game-result');
         }
         $scope.resumeGame = function() {
-<<<<<<< HEAD
             $scope.showingTut = false;
             startCount();
             gotoAnchor('main-screen');
@@ -218,17 +164,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
                 stopCount();
             }
             $scope.showingTut = true;
-=======
-            $scope.pausing = false;
-            startCount();
-            gotoAnchor('main-screen');
-        }
-        $scope.finishGame = function() {
-            stopCount();
-            gotoAnchor('game-result');
-        }
-        $scope.loadTutorial = function() {
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             gotoAnchor('tutorial');
         }
 
@@ -242,12 +177,9 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             }
         }
         var startCount = function() {
-<<<<<<< HEAD
             $scope.running = true;
             $scope.showingTut = false;
             $scope.pausing = false;
-=======
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
             count = $interval(function() {
                 $scope.seconds++;
             }, 100);
@@ -315,14 +247,8 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             var number = obj.currentTarget.children[0].getAttribute('name');
             if (number == indexPicture[currentIndex]) {
                 var imageChanging = document.createElement("img");
-<<<<<<< HEAD
                 imageChanging.setAttribute("class", "img-icon");
                 imageChanging.setAttribute("src", "../img/" + $scope.currentPicture.url);
-=======
-                imageChanging.setAttribute("src", "http://localhost:3000/img/" + $scope.currentPicture.url);
-                imageChanging.height = 42;
-                imageChanging.width = 42;
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
                 obj.currentTarget.removeChild(obj.currentTarget.children[0]);
                 obj.currentTarget.appendChild(imageChanging);
                 addScore();
@@ -330,10 +256,7 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
             } else {
                 $scope.triedTime++;
                 if ($scope.triedTime == 3) {
-<<<<<<< HEAD
                     trueAll = false;
-=======
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
                     loadNextPicture();
                 }
             }
@@ -341,7 +264,6 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
         $scope.testFunc = function() {
             console.log('test ok');
         }
-<<<<<<< HEAD
         var getNumberOfPlayer = function() {
             UsersService.getNumberPlayer({
                 action: 'getNumberPlayer'
@@ -351,7 +273,5 @@ angular.module('gameBoard').controller('GameBoardController', ['$scope',
                 console.log(errorResponse);
             });
         }
-=======
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
     }
 ]);

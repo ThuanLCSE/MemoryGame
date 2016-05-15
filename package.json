@@ -9,10 +9,6 @@
 		"express-session": "~1.7.6",
 		"ejs": "~1.0.0",
 		"mongoose": "~3.8.15",
-<<<<<<< HEAD
-=======
-		"socket.io": "~1.1.0",
->>>>>>> fc14cc390e97d3e7a0d1479509a81833a81f53ab
 		"connect-mongo": "~0.4.1",
 		"cookie-parser": "~1.3.3"
 	},
